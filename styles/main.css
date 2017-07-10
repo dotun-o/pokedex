@@ -4,9 +4,13 @@
     font-family: "Varela Round", sans-serif;
 }
 
-#hero {
+#hero, .modal-header {
     background: linear-gradient(135deg, #43cdef 0%, #1f9ed3 75%);
     color: #fff;
+}
+
+.modal-header {
+    border-radius: 5px 5px 0 0;
 }
 
 #hero a {
@@ -24,11 +28,17 @@
 
 .tile {
     margin: 10px;
+    border-radius: 5px;
     padding: 10px;
     width: 200px;
     height: 200px;
     text-align: center;
     cursor: pointer;
+    transition: 0.25s;
+}
+
+.tile:hover {
+    background-color: #f7f7f7;
 }
 
 .modal-dialog {
