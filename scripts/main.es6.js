@@ -15,7 +15,7 @@ function renderTiles(payload) {
     for(var tile of payload.pokemon) {
         var data = `<li class="tile" data-toggle="modal" data-target="${"#modal-" + tile.name}">
         <h4>${tile.name}</h4>
-        <img src="${tile.img}" alt="'"Thumbnail: ${tile.name}">
+        <img src="${tile.img}" alt="Thumbnail: ${tile.name}">
         </li>`;
         
         $("#tiles").append(data);
@@ -33,7 +33,7 @@ function createModal(tile) {
         <h4 class="modal-title">${tile.name}</h4>
       </div>
       <div class="modal-body">
-        <div class="text-center"><img src="${tile.img}" alt="'"Thumbnail: ${tile.name}"></div>
+        <div class="text-center"><img src="${tile.img}" alt="Thumbnail: ${tile.name}"></div>
         <p>Type: ${tile.type}</p>
         <p>Height: ${tile.height}</p>
         <p>Weight: ${tile.weight}</p>
