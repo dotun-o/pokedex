@@ -15,6 +15,8 @@
     <!--[if lt IE 9]>
 	    <script src="scripts/html5shiv.min.js"></script>
     <![endif]-->
+
+    <title>Pokedex by Dotun</title>
 </head>
 
 <body>
