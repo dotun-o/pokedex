@@ -45,6 +45,12 @@
     max-width: 400px;
 }
 
+.modal-footer {
+    border-radius: 0 0 5px 5px;
+    background-color: #f5f5f5;
+    text-align: center;
+}
+
 .footer {
   padding: 30px 20px 20px 20px;
   background-color: #f5f5f5;
