@@ -23,7 +23,7 @@
     <h4><a href="http://code.dotun.me/" target="_blank">by Dotun</a></h4>
 </header>
 
-<div class="container">
+<div class="container-fluid">
     <ul id="tiles">
     </ul>
 </div>
