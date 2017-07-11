@@ -4,15 +4,24 @@ $(document).ready(main);
 
 function main() {
     var url = "data/pokedex.json";
+    var data = "";
     $.ajax({
         url: url,
         success: renderTiles,
         dataType: "json"
-    });
+    })
+    .then(searchWrapper);
 }
 
 function renderTiles(payload) {
-    for(var tile of payload.pokemon) {
+    var pokemon = payload.pokemon;
+    
+    // first, clear whatever current contents of list & modals
+    // useful to remove "Loading..." at first load
+    // and also for search filtering
+    $("#tiles, #modals").empty();
+
+    for(var tile of pokemon) {
         var data = `<li class="tile" data-toggle="modal" data-target="${"#modal-" + tile.name}">
         <h4>${tile.name}</h4>
         <img src="${tile.img}" alt="Thumbnail: ${tile.name}">
@@ -52,5 +61,39 @@ function createModal(tile) {
       </div>
     </div>`;
     
-    $("body").append(data);
+    $("#modals").append(data);
+}
+
+/*
+We cannot directly use the search function here,
+since, once used as an event handler,
+its parameter would be the event object,
+instead of the AJAX payload from the promise.
+Instead, the payload is passed from
+the jQuery AJAX promise via the searchWrapper,
+and closed over by the inner search closure.
+*/
+function searchWrapper(payload) {
+  function search() {
+    var searchTerm = $("#search-box").val().replace(/[ ]/gi, "");
+
+    if(searchTerm === "") {
+      renderTiles(payload);
+    }
+    else {
+      var filteredPayload = payload.pokemon.filter(function(node) {
+                          var pattern = new RegExp(searchTerm, "gi");
+                          return pattern.test(node.name);
+                        });
+      renderTiles({"pokemon": filteredPayload});
+    }
+  }
+
+  $("#search-box").keyup(search);
+  $("#clear-button").click(clearSearch);
+  $("#clear-button").click(search);
+}
+
+function clearSearch() {
+  $("#search-box").val("");
 }
