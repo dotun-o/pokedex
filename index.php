@@ -6,7 +6,7 @@
 
     <script src="scripts/jquery.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
-    <script src="scripts/main.es6.js"></script>
+    <script src="scripts/main.js"></script>
 
     <link rel="stylesheet" href="styles/normalize.min.css">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
