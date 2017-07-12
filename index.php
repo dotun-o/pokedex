@@ -27,7 +27,7 @@
 
 <div class="container">
     <div class="input-group">
-        <input type="text" id="search-box" class="form-control" placeholder="Search for a Pokemon...">
+        <input type="text" id="search-box" class="form-control" placeholder="Search for a Pokémon...">
         <span class="input-group-btn">
             <button id="clear-button" class="btn btn-info">X</button>
         </span>
@@ -44,7 +44,7 @@
 </div>
 
 <footer class="footer text-center">
-    <p class="text-muted">&copy; <?php echo date("Y"); ?> Pokedex <a href="http://code.dotun.me/" target="_blank">by Dotun</a></p>
+    <p class="text-muted">All Pokémon content are &copy; Nintendo, Game Freak, and The Pokémon Company.</p>
 </footer>
 </body>
 </html>
