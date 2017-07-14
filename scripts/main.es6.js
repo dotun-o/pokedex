@@ -23,7 +23,7 @@ function renderTiles(payload) {
     $("#tiles, #modals").empty();
 
     for(var tile of pokemon) {
-        var data = `<li class="tile" data-toggle="modal" data-target="${"#modal-" + tile.name}">
+        var data = `<li class="tile" data-toggle="modal" data-target="${"#modal-" + tile.name.toLowerCase().replace(/[^a-z]/gi, "")}">
         <h4>${tile.name}</h4>
         <img src="${tile.img}" alt="Thumbnail: ${tile.name}">
         </li>`;
@@ -35,7 +35,7 @@ function renderTiles(payload) {
 }
 
 function createModal(tile) {
-    var data = `<div id="${"modal-" + tile.name}" class="modal fade" role="dialog">
+    var data = `<div id="${"modal-" + tile.name.toLowerCase().replace(/[^a-z]/gi, "")}" class="modal fade" role="dialog">
   <div class="modal-dialog text-center">
     <div class="modal-content">
       <div class="modal-header">
