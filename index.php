@@ -44,8 +44,8 @@
 <div id="modals">
 </div>
 
-<footer class="footer text-center">
-    <p class="text-muted">All Pokémon content are &copy; Nintendo, Game Freak, and The Pokémon Company.</p>
+<footer class="footer text-center text-muted">
+    <p>All Pokémon content are &copy; Nintendo, Game Freak, and The Pokémon Company.</p>
 </footer>
 </body>
 </html>

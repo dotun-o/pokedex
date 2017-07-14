@@ -10,7 +10,8 @@ function main() {
         success: renderTiles,
         dataType: "json"
     })
-    .then(searchWrapper);
+    .then(searchWrapper)
+    .fail(dataNotFound);
 }
 
 function renderTiles(payload) {
@@ -96,4 +97,8 @@ function searchWrapper(payload) {
 
 function clearSearch() {
   $("#search-box").val("");
+}
+
+function dataNotFound() {
+  $("#tiles").html("Error: Data could not be loaded.");
 }
