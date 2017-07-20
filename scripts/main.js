@@ -3,66 +3,49 @@
 $(document).ready(main);
 
 function main() {
-    var url = "data/pokedex.json";
-    var data = "";
-    $.ajax({
-        url: url,
-        success: renderTiles,
-        dataType: "json"
-    })
-    .then(searchWrapper)
-    .fail(dataNotFound);
+  var url = "data/pokedex.json";
+  var data = "";
+  $.ajax({
+    url: url,
+    success: renderTiles,
+    dataType: "json"
+  }).then(searchWrapper).fail(dataNotFound);
 }
 
 function renderTiles(payload) {
-    var pokemon = payload.pokemon;
-    
-    // first, clear whatever current contents of list & modals
-    // useful to remove "Loading..." at first load
-    // and also for search filtering
-    $("#tiles, #modals").empty();
+  var pokemon = payload.pokemon;
 
-    for(var tile of pokemon) {
-        var data = `<li class="tile" data-toggle="modal" data-target="${"#modal-" + tile.name.toLowerCase().replace(/[^a-z]/gi, "")}">
-        <h4>${tile.name}</h4>
-        <img src="${tile.img}" alt="Thumbnail: ${tile.name}">
-        </li>`;
-        
-        $("#tiles").append(data);
+  // first, clear whatever current contents of list & modals
+  // useful to remove "Loading..." at first load
+  // and also for search filtering
+  $("#tiles, #modals").empty();
 
-        createModal(tile);
+  for (var _iterator = pokemon, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+    var _ref;
+
+    if (_isArray) {
+      if (_i >= _iterator.length) break;
+      _ref = _iterator[_i++];
+    } else {
+      _i = _iterator.next();
+      if (_i.done) break;
+      _ref = _i.value;
     }
+
+    var tile = _ref;
+
+    var data = "<li class=\"tile\" data-toggle=\"modal\" data-target=\"" + ("#modal-" + tile.name.toLowerCase().replace(/[^a-z]/gi, "")) + "\">\n        <h4>" + tile.name + "</h4>\n        <img src=\"" + tile.img + "\" alt=\"Thumbnail: " + tile.name + "\">\n        </li>";
+
+    $("#tiles").append(data);
+
+    createModal(tile);
+  }
 }
 
 function createModal(tile) {
-    var data = `<div id="${"modal-" + tile.name.toLowerCase().replace(/[^a-z]/gi, "")}" class="modal fade" role="dialog">
-  <div class="modal-dialog text-center">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">${tile.name}</h4>
-      </div>
-      <div class="modal-body">
-        <div><img src="${tile.img}" alt="Thumbnail: ${tile.name}"></div>
-        <hr>
-        <h4>Type</h4>
-        <p>${tile.type}</p>
-        <hr>
-        <h4>Height</h4>
-        <p>${tile.height}</p>
-        <hr>
-        <h4>Weight</h4>
-        <p>${tile.weight}</p>
-        <hr>
-        <h4>Weaknesses</h4>
-        <p>${tile.weaknesses}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>`;
-    
-    $("#modals").append(data);
+  var data = "<div id=\"" + ("modal-" + tile.name.toLowerCase().replace(/[^a-z]/gi, "")) + "\" class=\"modal fade\" role=\"dialog\">\n  <div class=\"modal-dialog text-center\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n        <h4 class=\"modal-title\">" + tile.name + "</h4>\n      </div>\n      <div class=\"modal-body\">\n        <div><img src=\"" + tile.img + "\" alt=\"Thumbnail: " + tile.name + "\"></div>\n        <hr>\n        <h4>Type</h4>\n        <p>" + tile.type + "</p>\n        <hr>\n        <h4>Height</h4>\n        <p>" + tile.height + "</p>\n        <hr>\n        <h4>Weight</h4>\n        <p>" + tile.weight + "</p>\n        <hr>\n        <h4>Weaknesses</h4>\n        <p>" + tile.weaknesses + "</p>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>";
+
+  $("#modals").append(data);
 }
 
 /*
@@ -78,15 +61,14 @@ function searchWrapper(payload) {
   function search() {
     var searchTerm = $("#search-box").val().replace(/[ ]/gi, "");
 
-    if(searchTerm === "") {
+    if (searchTerm === "") {
       renderTiles(payload);
-    }
-    else {
-      var filteredPayload = payload.pokemon.filter(function(node) {
-                          var pattern = new RegExp(searchTerm, "gi");
-                          return pattern.test(node.name);
-                        });
-      renderTiles({"pokemon": filteredPayload});
+    } else {
+      var filteredPayload = payload.pokemon.filter(function (node) {
+        var pattern = new RegExp(searchTerm, "gi");
+        return pattern.test(node.name);
+      });
+      renderTiles({ "pokemon": filteredPayload });
     }
   }
 
